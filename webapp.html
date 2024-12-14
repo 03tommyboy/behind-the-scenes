@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Band Name Generator</title>
+<style>
+body {
+  font-family: sans-serif;
+  text-align: center;
+}
+#name-container {
+  margin-top: 20px;
+  font-size: 1.2em;
+  font-weight: bold;
+}
+</style>
+</head>
+<body>
+  <h1>Band Name Generator</h1>
+  <button onclick="generateBandName()">Generate Name</button>
+  <div id="name-container"></div>
+  <br>
+  <a href="scratch.html">Back to "Behind the Scenes"</a>
+
+  <script>
+    const adjectives = [
+      "Lantern", "Compass", "Marble", "Keyhole", "Polaroid",
+"Latch", "Revolver", "Mirror", "Typewriter", "Sundial",
+"Firefly", "Sparrow", "Jackal", "Raven", "Wolf",
+"Seahorse", "Viper", "Lynx", "Otter", "Grizzly",
+"Clementine", "Honeycomb", "Marmalade", "Espresso", "Biscuit",
+"Watermelon", "Peppercorn", "Pomegranate", "Avocado", "Saffron",
+"Glacier", "Redwood", "Thunderstorm", "Ocean", "Meadow",
+"Avalanche", "Cactus", "Eclipse", "Zephyr", "Horizon",
+"Reverie", "Gravity", "Echo", "Paradox", "Solitude",
+"Euphoria", "Nexus", "Obsidian", "Mirage", "Nebula",
+"Phoenix", "Pegasus", "Minotaur", "Colossus", "Oracle",
+"Valkyrie", "Trojan", "Spartan", "Chimera", "Titan",
+"Indigo", "Plaid", "Stripe", "Crimson", "Ivory",
+"Amber", "Teal", "Onyx", "Sapphire", "Maroon",
+"Cassette", "Vinyl", "Matchstick", "Trolley", "Umbrella",
+"Telescope", "Backpack", "Lightbulb", "Paperclip", "Toothpick",
+"Shadow", "Ember", "Fog", "Ruin", "Grave",
+"Serpent", "Cobweb", "Labyrinth", "Cipher", "Inferno",
+"Toadstool", "Pancake", "Bumblebee", "Pickle", "Jellyfish",
+"Yo-yo", "Dandelion", "Moonbeam", "Stiletto", "Whisk","Bright", "Calm", "Gentle", "Kind", "Soft",
+"Warm", "Cold", "Loud", "Quiet", "Sharp",
+"Happy", "Sad", "Angry", "Brave", "Lazy",
+"Fast", "Slow", "Large", "Small", "Heavy",
+"Light", "Strong", "Weak", "Smart", "Clever",
+"Bold", "Shy", "Curious", "Dull", "Neat",
+"Messy", "Tough", "Fresh", "Ancient", "Modern",
+"Empty", "Full", "Fierce", "Wild", "Tame",
+"Sweet", "Bitter", "Salty", "Spicy", "Sour",
+"Bright", "Dark", "Pure", "Dirty", "Gentle",
+"Rough", "Smooth", "Soft", "Hard", "Fragile",
+"Sturdy", "Lush", "Bare", "Wet", "Dry",
+"Hot", "Cool", "Icy", "Fiery", "Stormy",
+"Sunny", "Cloudy", "Cheerful", "Grim", "Pale",
+"Vivid", "Colorful", "Plain", "Rusty", "Shiny",
+"Golden", "Silver", "Bronze", "Iridescent", "Hazy",
+"Sharp", "Blunt", "Pointy", "Flat", "Hollow",
+"Solid", "Smooth", "Textured", "Velvety", "Prickly",
+"Thorny", "Delicate", "Tangled", "Knotty", "Elegant",
+"Regal", "Majestic", "Humble", "Quaint", "Mysterious"
+    ];
+    const nouns = [
+      "Lantern", "Compass", "Marble", "Keyhole", "Polaroid",
+"Latch", "Revolver", "Mirror", "Typewriter", "Sundial",
+"Firefly", "Sparrow", "Jackal", "Raven", "Wolf",
+"Seahorse", "Viper", "Lynx", "Otter", "Grizzly",
+"Clementine", "Honeycomb", "Marmalade", "Espresso", "Biscuit",
+"Watermelon", "Peppercorn", "Pomegranate", "Avocado", "Saffron",
+"Glacier", "Redwood", "Thunderstorm", "Ocean", "Meadow",
+"Avalanche", "Cactus", "Eclipse", "Zephyr", "Horizon",
+"Reverie", "Gravity", "Echo", "Paradox", "Solitude",
+"Euphoria", "Nexus", "Obsidian", "Mirage", "Nebula",
+"Phoenix", "Pegasus", "Minotaur", "Colossus", "Oracle",
+"Valkyrie", "Trojan", "Spartan", "Chimera", "Titan",
+"Indigo", "Plaid", "Stripe", "Crimson", "Ivory",
+"Amber", "Teal", "Onyx", "Sapphire", "Maroon",
+"Cassette", "Vinyl", "Matchstick", "Trolley", "Umbrella",
+"Telescope", "Backpack", "Lightbulb", "Paperclip", "Toothpick",
+"Shadow", "Ember", "Fog", "Ruin", "Grave",
+"Serpent", "Cobweb", "Labyrinth", "Cipher", "Inferno",
+"Toadstool", "Pancake", "Bumblebee", "Pickle", "Jellyfish",
+"Yo-yo", "Dandelion", "Moonbeam", "Stiletto", "Whisk", "Bright", "Calm", "Gentle", "Kind", "Soft",
+"Warm", "Cold", "Loud", "Quiet", "Sharp",
+"Happy", "Sad", "Angry", "Brave", "Lazy",
+"Fast", "Slow", "Large", "Small", "Heavy",
+"Light", "Strong", "Weak", "Smart", "Clever",
+"Bold", "Shy", "Curious", "Dull", "Neat",
+"Messy", "Tough", "Fresh", "Ancient", "Modern",
+"Empty", "Full", "Fierce", "Wild", "Tame",
+"Sweet", "Bitter", "Salty", "Spicy", "Sour",
+"Bright", "Dark", "Pure", "Dirty", "Gentle",
+"Rough", "Smooth", "Soft", "Hard", "Fragile",
+"Sturdy", "Lush", "Bare", "Wet", "Dry",
+"Hot", "Cool", "Icy", "Fiery", "Stormy",
+"Sunny", "Cloudy", "Cheerful", "Grim", "Pale",
+"Vivid", "Colorful", "Plain", "Rusty", "Shiny",
+"Golden", "Silver", "Bronze", "Iridescent", "Hazy",
+"Sharp", "Blunt", "Pointy", "Flat", "Hollow",
+"Solid", "Smooth", "Textured", "Velvety", "Prickly",
+"Thorny", "Delicate", "Tangled", "Knotty", "Elegant",
+"Regal", "Majestic", "Humble", "Quaint", "Mysterious"
+    ];
+
+        function generateBandName() {
+    const randomAdjective = adjectives[Math.floor(Math.random() * adjectives.length)];
+    const randomNoun = nouns[Math.floor(Math.random() * nouns.length)];
+    const bandName = `${randomAdjective} ${randomNoun}`;
+    
+    // Generate a random freshness rating (0-10)
+    const freshnessRating = Math.floor(Math.random() * 11); 
+
+    let ratingMessage = "";
+    if (freshnessRating < 3) {
+        ratingMessage = "Yeah that ain't fresh bro";
+    } else if (freshnessRating >= 3 && freshnessRating <= 5) {
+        ratingMessage = "That's pretty mid. You could still do better";
+    } else if (freshnessRating >= 6 && freshnessRating <= 8) {
+        ratingMessage = "Dang okay, I see you I see you";
+    } else if (freshnessRating === 9) {
+        ratingMessage = "It don't get much fresher than that!";
+    } else {
+        ratingMessage = "ZAYUM DOOD THAT'S FRESH TO DEATH!";
+    }
+
+    // Update the HTML content with the band name and freshness rating
+    document.getElementById("name-container").innerHTML = `${bandName}<br><br>Fresh Rating: ${freshnessRating}<br><br>${ratingMessage}`;
+    }
+
+  </script>
+</body>
+</html>
